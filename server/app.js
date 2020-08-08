@@ -3,10 +3,15 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
+const mongoose = require('mongoose');
+
+
+
 const myRouter = require('./routes/routes');
 
 
 const port = (process.env.PORT || 3000)
+
 
 app.use(cors());
 app.use(myRouter);
