@@ -1,0 +1,31 @@
+.DS_Store
+client/node_modules
+server/node_modules
+client/dist
+
+server/node_modules
+
+napomena
+
+
+/tests/e2e/videos/
+/tests/e2e/screenshots/
+
+# local env files
+client/.env.local
+client/.env.*.local
+
+# Log files
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/pnpm-debug.log*
+
+# Editor directories and files
+client/.idea
+client/.vscode
+client/*.suo
+client/*.ntvs*
+client/*.njsproj
+client/*.sln
+client/*.sw?
