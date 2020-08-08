@@ -13,6 +13,7 @@ napomena
 
 # local env files
 client/.env.local
+server/.env
 client/.env.*.local
 
 # Log files
