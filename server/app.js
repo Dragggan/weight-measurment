@@ -1,14 +1,27 @@
+require('dotenv').config();
+const debug = require('debug')('debug:DEFAULT');
+const DBdebug = require('debug')('debug:DB');
 const express = require('express');
 const cors = require('cors');
 const app = express();
+
+
+
+
+
+const myRouter = require('./routes/routes');
+
+
+const port = (process.env.PORT || 3000)
+
+
 app.use(cors());
-app.get('/', (req, res) => {
-    res.send('works');
-});
+app.use(myRouter);
+//DO WE NEED THIS? THIS IS WHEN SUBMITING FORM
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 
-
-
-app.listen('8081', () => {
-    console.log('listening on port 8081... ');
+app.listen(port, () => {
+    debug(` listening on port ${port}...`)
 });

@@ -3,7 +3,7 @@
     <form action="" method="post">
       <p>enter weight</p>
       <input type="number" name="" id="" />
-      <button type="submit"></button>
+      <button type="submit">send weight data</button>
     </form>
   </div>
 </template>
