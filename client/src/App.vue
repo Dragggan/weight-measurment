@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <p>enter weight</p>
-    <input type="number" name="" id="" />
-    <button type="submit" @click="getData()">send weight data</button>
-    <pre v-if="response.length !== 0">
+    <section>
+      <p>enter weight</p>
+      <input type="number" name="" v-model="currentUserWeight" />
+      <button type="submit" @click="insertData()">send weight data</button>
+    </section>
+    <section>
+      <pre v-if="response.length !== 0">
        {{ response }}
      </pre
-    >
+      >
+    </section>
   </div>
 </template>
 
@@ -18,9 +22,24 @@ export default {
   data() {
     return {
       response: [],
+      currentUserWeight: "",
     };
   },
   methods: {
+    insertData() {
+      axios
+        .post("http://localhost:3000", {
+          weight: Number(this.currentUserWeight),
+        })
+        .then((response) => {
+          console.log(response);
+       
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     getData() {
       axios
         .get("http://localhost:3000")
@@ -32,7 +51,14 @@ export default {
         });
     },
   },
-  mounted() {},
+
+  mounted() {
+    this.getData();
+  },
+
+  updated () {
+       this.getData();
+  },
 };
 </script>
 
