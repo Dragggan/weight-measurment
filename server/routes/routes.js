@@ -4,7 +4,7 @@ const debug = require('debug')('debug:DEFAULT');
 const DBdebug = require('debug')('debug:DB');
 const mongoose = require('mongoose');
 router.use(express.json());
-
+const cors = require('cors');
 
 mongoose.connect('mongodb://localhost/playground', { useNewUrlParser: true, useUnifiedTopology: true })
   .then((response) => {
@@ -34,28 +34,23 @@ async function getMeasurmentFromDb() {
   return measurments;
 };
 
-async function insertWeightDocumentintoDb(data) {
-  const measurment = new ListOfMeasurments({
-    weight: data.weight
-  });
-  measurment.save();
-
-};
 
 
 
-router.get('/', function (req, res) {
-  let measurments = ListOfMeasurments.find({})
+
+router.get('/', cors(), async function (req, res) {
+  let measurments = await ListOfMeasurments.find({})
     .then(response => response)
     .catch(err => console.log(err));
+  console.log("=================");
+  res.status(200).send(measurments);
 
-  res.send(measurments);
 });
 
 
 
-
-router.post('/', async function (req, res) {
+// POST REQUEST
+router.post('/allweights', async function (req, res) {
   const Joi = require('joi');
   const schema = Joi.object({
     weight: Joi.number().min(10).max(110).required()
@@ -69,5 +64,12 @@ router.post('/', async function (req, res) {
     res.send(`INSERTED IN DB DOCUMENT WITH WEIGHT: ${JSON.stringify(req.body.weight)}`);
   }
 });
+
+async function insertWeightDocumentintoDb(data) {
+  const measurment = new ListOfMeasurments({
+    weight: data.weight
+  });
+  await measurment.save();
+};
 
 module.exports = router;

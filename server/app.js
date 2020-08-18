@@ -2,7 +2,7 @@ require('dotenv').config();
 const debug = require('debug')('debug:DEFAULT');
 const DBdebug = require('debug')('debug:DB');
 const express = require('express');
-const cors = require('cors');
+
 const app = express();
 
 
