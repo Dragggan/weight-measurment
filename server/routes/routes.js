@@ -25,21 +25,19 @@ router.post('/', async function (req, res) {
   }
   else {
     DBData.insertWeightDocumentintoDb(req.body);
-    res.send({"weight":req.body.weight});
+    res.send({ "weight": req.body.weight });
   }
 });
 
 
 router.delete('/', async function (req, res) {
-  // if (schema.validate(req.body).error) {
-  //   return res.status(400).send("weight walue should be between 10 and 100 kg");
+  const measurments = await DBData.deleteUserWeightDataFromDb(req.body);
+  // console.log(measurments);
+  // if (measurments === undefined) {
+  //   res.send("not found ID");
   // }
-  // else {
-    DBData.deleteUserWeightDataFromDb(req.body);
-     res.send(req.body);
- // }
+  res.status(200).send(`DELETED ID= ${JSON.stringify(req.body._id)}`);
+
 });
-
-
 
 module.exports = router;

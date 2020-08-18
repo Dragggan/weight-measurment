@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const { response } = require('express');
 
 mongoose.connect('mongodb://localhost/playground', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((response) => {
+  .then(() => {
     console.log('CONECTED TO DB!');
     // DBdebug('CONECTED TO DB!');
   })
@@ -12,31 +13,46 @@ mongoose.connect('mongodb://localhost/playground', { useNewUrlParser: true, useU
 
 
 const myMeasurmentsScema = new mongoose.Schema({
-    id: Number,
-    weight: Number,
-    date: { type: Date, default: Date.now }
-  });
-  
-  const ListOfMeasurments = mongoose.model('listOfMeasurments', myMeasurmentsScema);
+  id: Number,
+  weight: Number,
+  date: { type: Date, default: Date.now }
+});
+
+const ListOfMeasurments = mongoose.model('listOfMeasurments', myMeasurmentsScema);
 
 
 async function getMeasurmentFromDb(res) {
-    let measurments = await ListOfMeasurments.find({})
-        .then(response => response)
-        .catch(err => console.log(err));
-    res.status(200).send(measurments);
+  let measurments = await ListOfMeasurments.find({})
+    .then(response => response)
+    .catch(err => console.log(err));
+  res.status(200).send(measurments);
 };
 
 async function insertWeightDocumentintoDb(data) {
   const measurment = new ListOfMeasurments({
     weight: data.weight
-  });
+  })
+    .then(response => console.log(response))
+    .catch(err => console.log(err));
   await measurment.save();
 };
+
 async function deleteUserWeightDataFromDb(data) {
-  const measurment = await ListOfMeasurments.findOneAndDelete({_id:data._id});
-  console.log("measurment");
-  console.log(measurment);
+  const findById = await ListOfMeasurments.findById(data._id)
+  .then((response) => console.log("RESPONSEE" + response))
+  .catch(err => console.log("ERRRRRRRRRR" + err));
+
+  if (findById !== null) {
+    console.log("OK");
+
+    
+  }
+  else {
+    console.log("NEMA");
+    return null;
+  }
+
+
 };
 
 
