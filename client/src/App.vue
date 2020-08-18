@@ -14,7 +14,7 @@ export default {
   name: "App",
   components: {},
   mounted () {
-    axios.get('http://localhost:8081')
+    axios.get('http://localhost:3000')
     .then((response)=>{
       console.log(response.data);
     })
