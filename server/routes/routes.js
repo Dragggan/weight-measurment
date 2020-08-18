@@ -30,5 +30,16 @@ router.post('/', async function (req, res) {
 });
 
 
+router.delete('/', async function (req, res) {
+  // if (schema.validate(req.body).error) {
+  //   return res.status(400).send("weight walue should be between 10 and 100 kg");
+  // }
+  // else {
+    DBData.deleteUserWeightDataFromDb(req.body);
+     res.send(req.body);
+ // }
+});
+
+
 
 module.exports = router;

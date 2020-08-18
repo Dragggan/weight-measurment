@@ -33,6 +33,15 @@ async function insertWeightDocumentintoDb(data) {
   });
   await measurment.save();
 };
+async function deleteUserWeightDataFromDb(data) {
+  const measurment = await ListOfMeasurments.findOneAndDelete({_id:data._id});
+  console.log("measurment");
+  console.log(measurment);
+};
+
+
+
 
 module.exports.getMeasurmentFromDb = getMeasurmentFromDb;
 module.exports.insertWeightDocumentintoDb = insertWeightDocumentintoDb;
+module.exports.deleteUserWeightDataFromDb = deleteUserWeightDataFromDb;
