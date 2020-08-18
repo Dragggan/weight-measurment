@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 router.use(express.json());
 
 
-
 mongoose.connect('mongodb://localhost/playground', { useNewUrlParser: true, useUnifiedTopology: true })
   .then((response) => {
     console.log('CONECTED TO DB!');
@@ -24,40 +23,39 @@ const myMeasurmentsScema = new mongoose.Schema({
 });
 
 const ListOfMeasurments = mongoose.model('listOfMeasurments', myMeasurmentsScema);
-const measurment1 = new ListOfMeasurments({
-  weight: 95
-});
+
 
 
 
 async function getMeasurmentFromDb() {
   let measurments = await ListOfMeasurments.find({})
-    .then(response=>response)
+    .then(response => response)
     .catch(err => console.log(err));
-    console.log(measurments)
-    return measurments;
+  return measurments;
+};
 
+async function insertWeightDocumentintoDb(data) {
+  const measurment = new ListOfMeasurments({
+    weight: data.weight
+  });
+  measurment.save();
 
 };
 
 
-// WORKING FOR UPDATE
-//  router.get('/insert',  function (req, res) {
-//   measurment1.save();
-//  res.send("aaaa")
-// });
 
- router.get('/',  function (req, res) {
-  getMeasurmentFromDb();
- res.send("RADI")
+router.get('/', function (req, res) {
+  let measurments = ListOfMeasurments.find({})
+    .then(response => response)
+    .catch(err => console.log(err));
+
+  res.send(measurments);
 });
 
 
 
 
 router.post('/', async function (req, res) {
-  console.log("test");
-  console.log(req.body);
   const Joi = require('joi');
   const schema = Joi.object({
     weight: Joi.number().min(10).max(110).required()
@@ -66,10 +64,10 @@ router.post('/', async function (req, res) {
   if (schema.validate(req.body).error) {
     return res.status(400).send("weight walue should be between 10 and 100 kg");
   }
-
-
-
-  res.send(req.body);
+  else {
+    insertWeightDocumentintoDb(req.body);
+    res.send(`INSERTED IN DB DOCUMENT WITH WEIGHT: ${JSON.stringify(req.body.weight)}`);
+  }
 });
 
 module.exports = router;
