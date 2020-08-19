@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-
-
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
-
-  constructor() { }
+  constructor(private httpService: HttpService) {}
 
   ngOnInit(): void {
   }
-name:String = "23"
-currentWeight:Number
+
+  currentWeight: Number;
 
   sendWeightMeasurment() {
-
+    
   }
 }
