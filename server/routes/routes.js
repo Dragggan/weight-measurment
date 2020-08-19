@@ -31,11 +31,7 @@ router.post('/', async function (req, res) {
 
 
 router.delete('/', async function (req, res) {
-  const measurments = await DBData.deleteUserWeightDataFromDb(req.body);
-  // console.log(measurments);
-  // if (measurments === undefined) {
-  //   res.send("not found ID");
-  // }
+ await DBData.deleteUserWeightDataFromDb(req.body);
   res.status(200).send(`DELETED ID= ${JSON.stringify(req.body._id)}`);
 
 });

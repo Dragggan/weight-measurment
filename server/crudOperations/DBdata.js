@@ -39,20 +39,8 @@ async function insertWeightDocumentintoDb(data) {
 
 async function deleteUserWeightDataFromDb(data) {
   const findById = await ListOfMeasurments.findById(data._id)
-  .then((response) => console.log("RESPONSEE" + response))
-  .catch(err => console.log("ERRRRRRRRRR" + err));
-
-  if (findById !== null) {
-    console.log("OK");
-
-    
-  }
-  else {
-    console.log("NEMA");
-    return null;
-  }
-
-
+  .then((response) => console.log( response))
+  .catch(err => console.log( err));
 };
 
 
