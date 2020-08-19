@@ -1,0 +1,12 @@
+
+
+<h2 class="mat-h2">Enter weight in KG (min 1, max 110)</h2>
+
+    <div>
+        <mat-form-field appearance="standard">
+            <mat-label>Enter weight</mat-label>
+            <input matInput type="number" [(ngModel)]="currentWeight">
+            <span matSuffix>KG</span>
+          </mat-form-field>
+    </div>
+    <button mat-raised-button (click)="sendWeightMeasurment()" >Basic</button>
