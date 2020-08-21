@@ -12,9 +12,9 @@ napomena
 /tests/e2e/screenshots/
 
 # local env files
-client/.env.local
-server/.env
-client/.env.*.local
+#client/.env.local
+#server/.env
+#client/.env.*.local
 
 # Log files
 client/npm-debug.log*
