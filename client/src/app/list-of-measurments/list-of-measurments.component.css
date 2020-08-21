@@ -10,3 +10,7 @@ table {
   .mat-table{
     /* background-color:lightgrey; */
 }
+
+.mat-row:hover {
+  background-color:#e01d1d14;
+}

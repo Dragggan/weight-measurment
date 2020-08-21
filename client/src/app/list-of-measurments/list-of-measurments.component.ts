@@ -1,19 +1,27 @@
 import { HttpService } from '../services/http.service';
-import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { SharedServiceService } from '../shared/shared-service.service';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatButton } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-list-of-measurments',
   templateUrl: './list-of-measurments.component.html',
   styleUrls: ['./list-of-measurments.component.css'],
 })
-export class ListOfMeasurmentsComponent implements OnInit,OnChanges {
-  constructor(private http: HttpService) {}
+export class ListOfMeasurmentsComponent implements OnInit {
+  constructor(private http: HttpService, public dialog: MatDialog,
+    private sharedService : SharedServiceService) {}
   selectedId: String;
-  displayedColumns: string[] = ['_id', 'date', 'weight','delete'];
+  displayedColumns: string[] = ['_id', 'date', 'weight', 'delete'];
   dataSource: any;
+
+  data: string[] = [];
+
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
@@ -22,11 +30,14 @@ export class ListOfMeasurmentsComponent implements OnInit,OnChanges {
       this.dataSource.paginator = this.paginator;
     });
   }
-  ngOnChanges(changes: SimpleChanges) {
-    console.log("test");
+
+
+  openDeleteDialog(){
+    this.sharedService.openDialog();
   }
 
-  deletemeasurementsById(selectedRow){
+
+  deletemeasurementsById(selectedRow) {
     this.http.deleteData(selectedRow._id).subscribe((data) => {
       console.log(data);
     });
@@ -40,5 +51,7 @@ export interface PeriodicElement {
   _id: string;
   date: Date;
   weight: number;
-  delete:MatButton;
+  delete: MatButton;
 }
+
+
