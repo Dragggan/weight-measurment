@@ -8,6 +8,8 @@ import { ListOfMeasurmentsComponent } from './list-of-measurments/list-of-measur
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpService } from './services/http.service';
+
 
 @NgModule({
   declarations: [AppComponent, FormComponent, ListOfMeasurmentsComponent],
@@ -18,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     MaterialModuleModule,
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

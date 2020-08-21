@@ -30,10 +30,9 @@ router.post('/', async function (req, res) {
 });
 
 
-router.delete('/', async function (req, res) {
- await DBData.deleteUserWeightDataFromDb(req.body);
-  res.status(200).send(`DELETED ID= ${JSON.stringify(req.body._id)}`);
-
+router.delete('/:id', async function (req, res) {
+ await DBData.deleteUserWeightDataFromDb(req.params.id);
+  res.status(200).send("OK");
 });
 
 module.exports = router;

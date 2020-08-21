@@ -7,10 +7,19 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class HttpService {
+  allData: [];
+
   constructor(private http: HttpClient) {}
 
   getData(): Observable<any> {
-     return this.http.get <any>('http://localhost:3000');
-    // return this.http.get<any>('https://jsonplaceholder.typicode.com/posts');
+    return this.http.get<any>('http://localhost:3000');
+  }
+
+  sendData(data): Observable<any> {
+    return this.http.post<any>('http://localhost:3000', { weight: data });
+  }
+
+  deleteData(_id) {
+    return this.http.delete<any>(`http://localhost:3000/${_id}`);
   }
 }

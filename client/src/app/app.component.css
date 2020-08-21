@@ -1,0 +1,14 @@
+div.container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.form {
+  margin: 2% 0 0 0;
+  width: 20%;
+}
+
+.list {
+  margin: 2% 0 0 0;
+  width: 76%;
+}

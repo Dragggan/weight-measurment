@@ -6,15 +6,14 @@ import { HttpService } from '../services/http.service';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css'],
 })
-export class FormComponent implements OnInit {
-  constructor(private httpService: HttpService) {}
-
-  ngOnInit(): void {
-  }
+export class FormComponent {
+  constructor(private http: HttpService) {}
 
   currentWeight: Number;
 
   sendWeightMeasurment() {
-    
+    this.http.sendData(this.currentWeight).subscribe((data) => {});
+    this.currentWeight=null
+
   }
 }

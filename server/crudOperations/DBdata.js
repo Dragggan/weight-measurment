@@ -32,15 +32,13 @@ async function insertWeightDocumentintoDb(data) {
   const measurment = new ListOfMeasurments({
     weight: data.weight
   })
-    .then(response => console.log(response))
-    .catch(err => console.log(err));
   await measurment.save();
 };
 
-async function deleteUserWeightDataFromDb(data) {
-  const findById = await ListOfMeasurments.findById(data._id)
-  .then((response) => console.log( response))
-  .catch(err => console.log( err));
+async function deleteUserWeightDataFromDb(id) {
+ await ListOfMeasurments.findByIdAndDelete(id)
+ .then(data => console.log(data))
+ .catch(err=> console.log(err))
 };
 
 
