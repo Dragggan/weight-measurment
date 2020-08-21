@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
-const { response } = require('express');
+const debug = require('debug')('debug:DEFAULT');
+const DBdebug = require('debug')('debug:DB');
+
 
 mongoose.connect('mongodb://localhost/playground', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log('CONECTED TO DB!');
-    // DBdebug('CONECTED TO DB!');
+    // console.log('CONECTED TO DB!');
+    DBdebug('CONECTED TO DB!');
   })
   .catch((err) => {
-    console.log(`could not connect : => ${err}`);
-    // DBdebug(`could not connect : => ${err}`);
+    // console.log(`could not connect : => ${err}`);
+    DBdebug(`could not connect : => ${err}`);
   });
 
 

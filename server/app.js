@@ -1,5 +1,4 @@
 require('dotenv').config();
-const debug = require('debug')('debug:DEFAULT');
 const DBdebug = require('debug')('debug:DB');
 const express = require('express');
 
@@ -26,5 +25,5 @@ app.use(express.static('public'));
 
 
 app.listen(port, () => {
-    console.log(` listening on port ${port}...`)
+  DBdebug(` listening on port ${port}...`)
 });

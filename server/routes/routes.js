@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const debug = require('debug')('debug:DEFAULT');
-const DBdebug = require('debug')('debug:DB');
 router.use(express.json());
 const Joi = require('joi');
-const DBData = require('../crudOperations/DBData');
+const DBData = require('../crudOperations/DBdata');
 
 
 //GET ALL WEIGHT DATA FROM DB 
