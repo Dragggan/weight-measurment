@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDataExampleDialog } from '../dialogBox/dialog-data-example-dialog';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list-of-measurments',
@@ -12,12 +13,13 @@ import { DialogDataExampleDialog } from '../dialogBox/dialog-data-example-dialog
   styleUrls: ['./list-of-measurments.component.css'],
 })
 export class ListOfMeasurmentsComponent implements OnInit {
-  constructor(private http: HttpService, public dialog: MatDialog) {}
+  constructor(private http: HttpService, public dialog: MatDialog
+  ) {}
   selectedId: String;
   displayedColumns: string[] = ['_id', 'date', 'weight', 'delete'];
   mesurmentsData: any;
 
-  data: string[] = [];
+
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -28,8 +30,10 @@ export class ListOfMeasurmentsComponent implements OnInit {
     });
   }
 
-  openDeleteDialog() {
-    this.dialog.open(DialogDataExampleDialog);
+  openDeleteDialog(id) {
+    this.dialog.open(DialogDataExampleDialog,{
+      data:id
+    });
 
     //   deletemeasurementsById(selectedRow) {
     // this.dialog.open(DialogDataExampleDialog,{
@@ -38,6 +42,7 @@ export class ListOfMeasurmentsComponent implements OnInit {
     //   }
   }
 }
+
 export interface PeriodicElement {
   _id: string;
   date: Date;

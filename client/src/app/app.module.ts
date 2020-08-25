@@ -25,5 +25,6 @@ import { SharedServiceService } from './shared/shared-service.service';
   ],
   providers: [HttpService,SharedServiceService],
   bootstrap: [AppComponent],
+  entryComponents:[DialogDataExampleDialog]
 })
 export class AppModule {}

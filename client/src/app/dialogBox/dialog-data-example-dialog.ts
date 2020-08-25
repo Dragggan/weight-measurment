@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'dialog-data-example-dialog',
@@ -11,10 +9,12 @@ import {
 })
 export class DialogDataExampleDialog implements OnInit {
   constructor(
-    @Inject(MAT_DIALOG_DATA)
-    public dialog: MatDialog
+    @Inject(MAT_DIALOG_DATA) public data: DialogDataExampleDialog,
+    public dialog: MatDialog,
+    private http: HttpService
   ) {}
  
+  test="sdgfdgdfg"
 
 
   ngOnInit(): void {
@@ -23,7 +23,8 @@ export class DialogDataExampleDialog implements OnInit {
   }
 
 
-deleteSelectedMeasurements(){
-  console.log("testr");
-}
+ deleteSelectedMeasurements(id){
+  this.http.deleteData(id).subscribe();
+  
+ }
 }

@@ -20,7 +20,7 @@ export class HttpService {
     return this.http.post<any>(environment.envVar.API_URL, { weight: data });
   }
 
-  deleteData(_id) {
-    return this.http.delete<any>(`environment.envVar.API_URL/${_id}`);
+  deleteData(id) {
+    return this.http.delete<any>(`${environment.envVar.API_URL}/${id}`);
   }
 }
