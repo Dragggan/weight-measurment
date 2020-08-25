@@ -1,11 +1,10 @@
 import { HttpService } from '../services/http.service';
-import { SharedServiceService } from '../shared/shared-service.service';
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-
+import { DialogDataExampleDialog } from '../dialogBox/dialog-data-example-dialog';
 
 @Component({
   selector: 'app-list-of-measurments',
@@ -13,38 +12,30 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./list-of-measurments.component.css'],
 })
 export class ListOfMeasurmentsComponent implements OnInit {
-  constructor(private http: HttpService, public dialog: MatDialog,
-    private sharedService : SharedServiceService) {}
+  constructor(private http: HttpService, public dialog: MatDialog) {}
   selectedId: String;
   displayedColumns: string[] = ['_id', 'date', 'weight', 'delete'];
-  dataSource: any;
+  mesurmentsData: any;
 
   data: string[] = [];
-
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.http.getData().subscribe((data) => {
-      this.dataSource = new MatTableDataSource<PeriodicElement>(data);
-      this.dataSource.paginator = this.paginator;
+      this.mesurmentsData = new MatTableDataSource<PeriodicElement>(data);
+      this.mesurmentsData.paginator = this.paginator;
     });
   }
 
+  openDeleteDialog() {
+    this.dialog.open(DialogDataExampleDialog);
 
-  openDeleteDialog(){
-    this.sharedService.openDialog();
-  }
-
-
-  deletemeasurementsById(selectedRow) {
-    this.http.deleteData(selectedRow._id).subscribe((data) => {
-      console.log(data);
-    });
-    this.http.getData().subscribe((data) => {
-      this.dataSource = new MatTableDataSource<PeriodicElement>(data);
-      this.dataSource.paginator = this.paginator;
-    });
+    //   deletemeasurementsById(selectedRow) {
+    // this.dialog.open(DialogDataExampleDialog,{
+    //   data:{selectedRow: selectedRow}
+    // })
+    //   }
   }
 }
 export interface PeriodicElement {
@@ -53,5 +44,3 @@ export interface PeriodicElement {
   weight: number;
   delete: MatButton;
 }
-
-

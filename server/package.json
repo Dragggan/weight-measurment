@@ -5,12 +5,13 @@
   "license": "MIT",
   "scripts": {
     "s": "node app.js",
-    "n": "DEBUG=debug:* nodemon app.js",
+    "n": "cross-env DEBUG=debug:* nodemon app.js ",
     "ns": "nodemon app.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

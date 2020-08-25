@@ -4,6 +4,6 @@
   <p>Delete this measurements?</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button  cdkFocusInitial>Ok</button>
+  <button mat-button mat-dialog-close>No Thanks</button>
+  <button mat-button  cdkFocusInitial (click)="deleteSelectedMeasurements()">Ok</button>
 </div>
