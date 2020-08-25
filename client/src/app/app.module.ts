@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/http.service';
-import { SharedServiceService } from './shared/shared-service.service';
 
 
 
@@ -23,7 +22,7 @@ import { SharedServiceService } from './shared/shared-service.service';
     HttpClientModule,
     MaterialModuleModule,
   ],
-  providers: [HttpService,SharedServiceService],
+  providers: [HttpService,ListOfMeasurmentsComponent],
   bootstrap: [AppComponent],
   entryComponents:[DialogDataExampleDialog]
 })

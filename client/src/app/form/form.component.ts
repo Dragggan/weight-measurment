@@ -12,8 +12,8 @@ export class FormComponent {
   currentWeight: Number;
 
   sendWeightMeasurment() {
-    this.http.sendData(this.currentWeight).subscribe((data) => {});
+    this.http.sendData(this.currentWeight).subscribe();
     this.currentWeight=null
-
+    window.location.reload();
   }
 }

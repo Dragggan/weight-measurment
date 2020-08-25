@@ -22,5 +22,6 @@ export class HttpService {
 
   deleteData(id) {
     return this.http.delete<any>(`${environment.envVar.API_URL}/${id}`);
+    
   }
 }
